@@ -11,16 +11,18 @@ public class Student {
 	private Long id;
 	private String name;
 	private String passportNumber;
+	private StudentType studentType;
 	
 	public Student() {
 		
 	}
 
-	public Student(Long id, String name, String passportNumber) {
+	public Student(Long id, String name, String passportNumber, StudentType studentType) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.passportNumber = passportNumber;
+		this.studentType = studentType;
 	}
 
 	public Long getId() {
@@ -45,6 +47,14 @@ public class Student {
 
 	public void setPassportNumber(String passportNumber) {
 		this.passportNumber = passportNumber;
+	}
+
+	public StudentType getStudentType() {
+		return studentType;
+	}
+
+	public void setStudentType(StudentType studentType) {
+		this.studentType = studentType;
 	}
 
 }
