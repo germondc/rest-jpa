@@ -3,8 +3,13 @@ package test.clyde.restjpa.controllers;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +33,15 @@ public class StudentController {
 	@GetMapping("/students")
 	public List<Student> retrieveAllStudents() {
 		return studentRepository.findAll();
+	}
+	
+	private List<Integer> lots = IntStream.range(0, 1000).boxed().collect(Collectors.toList());
+	
+	@GetMapping("/lots")
+	public Page<Integer> getLots(Pageable pageable) {
+		int start = (int) pageable.getOffset();
+		int end = (start + pageable.getPageSize()) > lots.size() ? lots.size() : (start + pageable.getPageSize());
+		return new PageImpl<Integer>(lots.subList(start, end), pageable, lots.size());
 	}
 
 	@GetMapping("/students/{id}")
