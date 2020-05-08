@@ -10,3 +10,4 @@ Simple CRUD Rest API with hibernate JPA persistence
 - [data.sql](https://github.com/germondc/rest-jpa/blob/master/src/main/resources/data.sql) for queries run at startup
 - [application.properties](https://github.com/germondc/rest-jpa/blob/master/src/main/resources/application.properties) includes settings for logging system SQL
 - Swagger UI with some customisation: http://localhost:8080/swagger-ui.html
+- Configuration properties, with annontated metadata

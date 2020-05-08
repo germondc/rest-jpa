@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import test.clyde.restjpa.config.StudentConfig;
 import test.clyde.restjpa.entities.Student;
 import test.clyde.restjpa.exceptions.StudentNotFoundException;
 import test.clyde.restjpa.repositories.StudentRepository;
@@ -30,12 +33,20 @@ public class StudentController {
 	@Autowired
 	private StudentRepository studentRepository;
 	
+	@Autowired
+	private StudentConfig config;
+	
+	private List<Integer> lots;
+	
 	@GetMapping("/students")
 	public List<Student> retrieveAllStudents() {
 		return studentRepository.findAll();
 	}
 	
-	private List<Integer> lots = IntStream.range(0, 1000).boxed().collect(Collectors.toList());
+	@PostConstruct
+	private void init() {
+		lots = IntStream.range(0, config.getRange()).boxed().collect(Collectors.toList());
+	}
 	
 	@GetMapping("/lots")
 	public Page<Integer> getLots(Pageable pageable) {

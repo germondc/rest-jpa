@@ -13,12 +13,15 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import test.clyde.restjpa.config.StudentConfig;
 import test.clyde.restjpa.controllers.StudentController;
 import test.clyde.restjpa.entities.Student;
 import test.clyde.restjpa.entities.StudentType;
@@ -26,6 +29,7 @@ import test.clyde.restjpa.repositories.StudentRepository;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(StudentController.class)
+@EnableConfigurationProperties(StudentConfig.class)
 public class RestJpaApplicationTests {
 	
 	@Autowired
